@@ -85,6 +85,7 @@ module ActiveAdmin
             }
 
             if active_admin_config.scope_style == :dropdown
+              label(active_admin_config.scope_style_options[:label].html_safe) if active_admin_config.scope_style_options.key?(:label)
               scopes_dropdown_renderer active_admin_config.scopes, scope_options
             else
               scopes_renderer active_admin_config.scopes, scope_options

@@ -18,8 +18,9 @@ module ActiveAdmin
     end
 
     # Set the scope style
-    def scope_style(style=:list)
+    def scope_style(style=:list, options={})
       config.scope_style = style
+      config.scope_style_options = options
     end
 
     # Configure the index page for the resource
