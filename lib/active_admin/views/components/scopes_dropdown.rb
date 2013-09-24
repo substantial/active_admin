@@ -14,7 +14,7 @@ module ActiveAdmin
 
 
       def default_class_name
-        "scopes"
+        'scopes select-nav'
       end
 
       def tag_name
