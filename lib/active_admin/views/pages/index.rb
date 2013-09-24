@@ -84,7 +84,11 @@ module ActiveAdmin
               :scope_count => config[:scope_count].nil? ? true : config[:scope_count]
             }
 
-            scopes_renderer active_admin_config.scopes, scope_options
+            if active_admin_config.scope_style == :dropdown
+              scopes_dropdown_renderer active_admin_config.scopes, scope_options
+            else
+              scopes_renderer active_admin_config.scopes, scope_options
+            end
           end
         end
 

@@ -17,6 +17,11 @@ module ActiveAdmin
       config.scope(*args, &block)
     end
 
+    # Set the scope style
+    def scope_style(style=:list)
+      config.scope_style = style
+    end
+
     # Configure the index page for the resource
     def index(options = {}, &block)
       options[:as] ||= :table

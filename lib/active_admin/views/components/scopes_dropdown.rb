@@ -1,0 +1,46 @@
+require 'active_admin/helpers/collection'
+require 'active_admin/view_helpers/method_or_proc_helper'
+
+module ActiveAdmin
+  module Views
+
+    # Renders a collection of ActiveAdmin::Scope objects as a
+    # simple list with a seperator
+    class ScopesDropdown < ActiveAdmin::Component
+      builder_method :scopes_dropdown_renderer
+
+      include ActiveAdmin::ScopeChain
+      include ::ActiveAdmin::Helpers::Collection
+
+
+      def default_class_name
+        "scopes"
+      end
+
+      def tag_name
+        'select'
+      end
+
+      def build(scopes, options = {})
+        scopes.each do |scope|
+          build_scope(scope, options) if call_method_or_proc_on(self, scope.display_if_block)
+        end
+      end
+
+      protected
+
+      def build_scope(scope, options)
+        option value: scope.id do
+          scope_name = I18n.t("active_admin.scopes.#{scope.id}", :default => scope.name)
+
+          text_node "#{scope_name} (#{get_scope_count(scope)})"
+        end
+      end
+
+      # Return the count for the scope passed in.
+      def get_scope_count(scope)
+        collection_size(scope_chain(scope, collection_before_scope))
+      end
+    end
+  end
+end

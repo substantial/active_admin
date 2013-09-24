@@ -49,6 +49,9 @@ module ActiveAdmin
     # Set breadcrumb builder
     attr_accessor :breadcrumb
 
+    # Set the scopes style
+    attr_accessor :scope_style
+
     # Store a reference to the DSL so that we can dereference it during garbage collection.
     attr_accessor :dsl
 
