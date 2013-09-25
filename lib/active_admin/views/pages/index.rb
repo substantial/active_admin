@@ -84,7 +84,14 @@ module ActiveAdmin
               :scope_count => config[:scope_count].nil? ? true : config[:scope_count]
             }
 
-            scopes_renderer active_admin_config.scopes, scope_options
+            if active_admin_config.scope_style == :dropdown
+              select_label = active_admin_config.scope_style_options[:label]
+              label(:class => 'select-label') { (select_label.html_safe) } unless select_label.nil?
+
+              scopes_dropdown_renderer active_admin_config.scopes, scope_options
+            else
+              scopes_renderer active_admin_config.scopes, scope_options
+            end
           end
         end
 
